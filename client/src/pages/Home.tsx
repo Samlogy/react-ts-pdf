@@ -41,7 +41,7 @@ function Home() {
   return (
     <Layout isHeaderVisible isFooterVisible>
       <Heading as="h1" mb="4rem" textAlign={"center"}>
-        Display All Pdfs
+        React Pdf App
       </Heading>
 
       <Flex flexDir={"column"} justify="center">

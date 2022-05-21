@@ -1,4 +1,5 @@
 import create from "zustand";
+import { devtools, persist } from "zustand/middleware";
 
 interface IAction {
   delete: boolean;
@@ -36,18 +37,23 @@ const INIT_ACTION = {
   details: false,
 };
 
-const usePdfStore = create<PdfState>((set) => ({
+const pdfStore = (set: any) => ({
   action: INIT_ACTION,
   pdf: null,
   fileName: "",
   isMultiPage: false,
 
-  setAction: (val: any) => set((state) => ({ ...val })),
-  setPdf: (val: any) => set((state) => ({ pdf: val })),
-  setMultiPage: (val: any) => set((state) => ({ isMultiPage: val })),
-  setFileName: (val: any) => set((state) => ({ fileName: val })),
-  zoomOut: (val: any) => set((state) => ({ pdf: state })),
-  zoomIn: (val: any) => set((state) => ({ pdf: state })),
-}));
+  setAction: (val: any) => set((state: any) => ({ ...val })),
+  setPdf: (val: any) => set((state: any) => ({ pdf: val })),
+  setMultiPage: (val: any) => set((state: any) => ({ isMultiPage: val })),
+  setFileName: (val: any) => set((state: any) => ({ fileName: val })),
+  zoomOut: (val: any) => set((state: any) => ({ pdf: state })),
+  zoomIn: (val: any) => set((state: any) => ({ pdf: state })),
+});
+
+// let usePdfStore = devtools(pdfStore, { name: "pdf_store" });
+// usePdfStore = persist(usePdfStore, { name: "pdf_store" });
+
+const usePdfStore = create<PdfState>(pdfStore);
 
 export default usePdfStore;

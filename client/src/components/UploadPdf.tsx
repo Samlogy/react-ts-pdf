@@ -57,8 +57,10 @@ const UploadPdf = () => {
         bottom="5%"
       />
       <View cond={pdf}>
-        <Text pos="fixed" right="17%" bottom="5%" w="15rem"> {fileName} </Text>
-        <Button onClick={() => setPdf(null)} pos="fixed" right="15%" bottom="5%">
+        <Text pos="fixed" right="22%" bottom="6%" w="50vw" textAlign="right">
+          {fileName}
+        </Text>
+        <Button onClick={() => setPdf(null)} pos="fixed" right="12%" bottom="5%">
           Reset
         </Button>
       </View>
