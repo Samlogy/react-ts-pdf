@@ -26,7 +26,11 @@ npm i && npm run dev
 2. display pdf (single / multiple page)
 3. preview pdf (single / multiple page)
 4. download pdf
-5. create pdf ?
+5. reset pdf
+6. display all pdf
+7. delete pdf
+8. create pdf (custom template)
+9. edit pdf
 
 to for building:
 
