@@ -18,6 +18,8 @@ npm i && npm run dev
 8. react icons --> assests (icons)
 9. eslint + prettier setup --> configure it according to guidelines
 
+10. express
+
 ### Feature:
 
 1. upload pdf
