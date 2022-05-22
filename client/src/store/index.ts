@@ -9,7 +9,8 @@ interface IAction {
   disable: boolean;
   display: boolean;
   add: boolean;
-  displayAll: any;
+  displayAll: boolean;
+  print: boolean;
 }
 
 interface PdfState {
@@ -37,6 +38,7 @@ const INIT_ACTION = {
   edit: false,
   details: false,
   displayAll: true,
+  print: false,
 };
 const INIT_FILE_DETAILS = {
   size: null,

@@ -5,7 +5,9 @@ export { default as DisplayPdf } from "./DisplayPdf";
 export { default as View } from "./View";
 export { default as PdfAction } from "./PdfAction";
 export { default as PdfDetails } from "./PdfDetails";
-
 export { default as UploadPdf } from "./UploadPdf";
 export { default as MenuOptions } from "./MenuOptions";
 export { default as DisplaySinglePdf } from "./DisplaySinglePdf";
+export { default as EditPdf } from "./EditPdf";
+export { default as CreatePdf } from "./CreatePdf";
+export { default as PrintPdf } from "./PrintPdf";

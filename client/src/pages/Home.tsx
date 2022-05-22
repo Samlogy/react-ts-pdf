@@ -1,6 +1,18 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import React from "react";
-import { DisplaySinglePdf, Layout, UploadPdf, PreviewPdf, DisplayPdf, PdfDetails, PdfAction, View } from "../components";
+import {
+  DisplaySinglePdf,
+  Layout,
+  UploadPdf,
+  PreviewPdf,
+  DisplayPdf,
+  PdfDetails,
+  PdfAction,
+  CreatePdf,
+  EditPdf,
+  PrintPdf,
+  View,
+} from "../components";
 import usePdfStore from "../store";
 
 const data = [
@@ -59,7 +71,7 @@ function Home() {
       </View>
 
       {/* <View cond={action.disable}>
-        <PdfAction isOpen={action.disable} pdfId={pdf.id} mode="disable" />
+        <PdfAction isOpen={action.disable} pdfId={data[0].id} mode="disable" />
       </View> */}
 
       <View cond={action.details}>
@@ -74,7 +86,17 @@ function Home() {
         <DisplayPdf />
       </View>
 
-      {/* create / edit --> pdf */}
+      <View cond={action.add}>
+        <CreatePdf />
+      </View>
+
+      <View cond={action.edit}>
+        <EditPdf />
+      </View>
+
+      <View cond={action.print}>
+        <PrintPdf />
+      </View>
     </Layout>
   );
 }
