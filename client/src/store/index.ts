@@ -9,6 +9,7 @@ interface IAction {
   disable: boolean;
   display: boolean;
   add: boolean;
+  displayAll: any;
 }
 
 interface PdfState {
@@ -16,13 +17,13 @@ interface PdfState {
   //   setName: (name: string) => void;
   action: IAction; // for each major feature in the app
   pdf: any;
-  fileName: string;
   isMultiPage: boolean;
+  fileDetails: any;
+  setFileDetails: any;
 
   setAction: any; // change action in app
   setPdf: any; // open / close pdf
   setMultiPage: any; // single / multi page
-  setFileName: any;
   zoomIn: any;
   zoomOut: any;
 }
@@ -35,25 +36,30 @@ const INIT_ACTION = {
   add: false,
   edit: false,
   details: false,
+  displayAll: true,
+};
+const INIT_FILE_DETAILS = {
+  size: null,
+  type: null,
+  name: null,
+  createdAt: null,
+  editedAt: null,
 };
 
 const pdfStore = (set: any) => ({
   action: INIT_ACTION,
   pdf: null,
-  fileName: "",
   isMultiPage: false,
+  fileDetails: INIT_FILE_DETAILS,
 
-  setAction: (val: any) => set((state: any) => ({ ...val })),
+  setFileDetails: (val: any) => set((state: any) => ({ fileDetails: { ...val } })),
+  setAction: (val: any) => set((state: any) => ({ action: { ...val } })),
   setPdf: (val: any) => set((state: any) => ({ pdf: val })),
   setMultiPage: (val: any) => set((state: any) => ({ isMultiPage: val })),
-  setFileName: (val: any) => set((state: any) => ({ fileName: val })),
   zoomOut: (val: any) => set((state: any) => ({ pdf: state })),
   zoomIn: (val: any) => set((state: any) => ({ pdf: state })),
 });
 
-// let usePdfStore = devtools(pdfStore, { name: "pdf_store" });
-// usePdfStore = persist(usePdfStore, { name: "pdf_store" });
-
-const usePdfStore = create<PdfState>(pdfStore);
+const usePdfStore = create<any>(devtools(pdfStore, { name: "pdf-store" }));
 
 export default usePdfStore;

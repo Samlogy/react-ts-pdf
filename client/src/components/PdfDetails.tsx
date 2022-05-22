@@ -20,12 +20,17 @@ interface IPdfDetails {
   isOpen: boolean;
 }
 const PdfDetails = ({ isOpen }: IPdfDetails) => {
-  const pdf = usePdfStore((state) => state.pdf);
-  const setAction = usePdfStore((state) => state.setAction);
-  const action = usePdfStore((state) => state.action);
+  const pdf = usePdfStore((state: any) => state.pdf);
+  const setAction = usePdfStore((state: any) => state.setAction);
+  const action = usePdfStore((state: any) => state.action);
+  const fileDetails = usePdfStore((state: any) => state.fileDetails);
+
+  const onClose = () => {
+    setAction({ ...action, details: false, displayAll: true });
+  };
 
   return (
-    <Modal isOpen={isOpen} onClose={() => setAction({ ...action, delete: false })} size="xl">
+    <Modal isOpen={isOpen} onClose={() => onClose()} size="xl">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader> PDF Details </ModalHeader>
@@ -33,16 +38,16 @@ const PdfDetails = ({ isOpen }: IPdfDetails) => {
 
         <ModalBody>
           <Flex flexDir="column">
-            <Flex justifyContent={"space-between"} alignItems="center" mb=".5rem"></Flex>
-            <Display label="File Name" data={pdf.name} />
-            <Display label="Size" data={pdf.size} />
-            <Display label="Last Modified" data={pdf.editedAt} />
-            <Display label="Created on" data={pdf.createdAt} />
+            <Display label="File Name" data={fileDetails.name} />
+            <Display label="Size" data={fileDetails.size} />
+            <Display label="File Type" data={fileDetails.type} />
+            <Display label="Last Modified" data={fileDetails.editedAt} />
+            <Display label="Created on" data={fileDetails.createdAt} />
           </Flex>
         </ModalBody>
 
         <ModalFooter>
-          <Button bg="gray_3" color="white" _hover={{ bg: "gray_4" }} onClick={() => setAction({ ...action, delete: false })}>
+          <Button bg="gray_3" color="white" _hover={{ bg: "gray_4" }} onClick={() => onClose()}>
             Close
           </Button>
         </ModalFooter>

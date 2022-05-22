@@ -89,7 +89,8 @@ const Header = ({ preview = false }: { preview?: boolean }) => {
   const setPdf = usePdfStore((state: any) => state.setPdf);
   const zoomIn = usePdfStore((state: any) => state.zoomIn);
   const zoomOut = usePdfStore((state: any) => state.zoomOut);
-  const fileName = usePdfStore((state: any) => state.fileName);
+  const fileDetails = usePdfStore((state: any) => state.fileDetails);
+
   const setMultiPage = usePdfStore((state: any) => state.setMultiPage);
   const pdf = usePdfStore((state: any) => state.pdf);
   const action = usePdfStore((state: any) => state.action);
@@ -139,7 +140,7 @@ const Header = ({ preview = false }: { preview?: boolean }) => {
         <IconButton aria-label="zoom-in" icon={<AiOutlineArrowLeft size={18} onClick={() => handleClose()} />} mr="1rem" />
         <AiOutlineFilePdf size={20} color="white" />
         <Text color="white" ml=".5rem" fontSize={"1rem"}>
-          {fileName}
+          {fileDetails.name}
         </Text>
       </Flex>
 

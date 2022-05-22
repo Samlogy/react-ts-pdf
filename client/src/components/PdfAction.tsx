@@ -18,28 +18,27 @@ interface IPdfAction {
   mode: string;
 }
 const PdfAction = ({ isOpen, pdfId, mode }: IPdfAction) => {
-  const action = usePdfStore((state) => state.action);
-  const setAction = usePdfStore((state) => state.setAction);
+  const action = usePdfStore((state: any) => state.action);
+  const setAction = usePdfStore((state: any) => state.setAction);
 
   const cancelRef = useRef(null);
   const onDelete = (pdfId: string | number) => {
-    // console.log("delete product: ", pdfId);
-    setAction({ delete: false });
+    setAction({ ...action, delete: false, displayAll: true });
+    // update state
+    // api
   };
 
   const onDisable = (pdfId: string | number) => {
-    // console.log("disable product: ", pdfId);
-    setAction({ disable: false });
+    setAction({ ...action, disable: false, displayAll: true });
+    // update state
+    // api
+  };
+  const onClose = (mode: string) => {
+    mode === "delete" ? setAction({ ...action, delete: false, displayAll: true }) : setAction({ ...action, disable: false, displayAll: true });
   };
 
   return (
-    <AlertDialog
-      motionPreset="slideInBottom"
-      leastDestructiveRef={cancelRef}
-      onClose={() => setAction({ ...action, delete: false })}
-      isOpen={isOpen}
-      isCentered
-    >
+    <AlertDialog motionPreset="slideInBottom" leastDestructiveRef={cancelRef} onClose={() => onClose(mode)} isOpen={isOpen} isCentered>
       <AlertDialogOverlay />
 
       <AlertDialogContent>
@@ -55,7 +54,7 @@ const PdfAction = ({ isOpen, pdfId, mode }: IPdfAction) => {
           <Button colorScheme="red" onClick={mode === "delete" ? () => onDelete(pdfId) : () => onDisable(pdfId)}>
             Yes
           </Button>
-          <Button ref={cancelRef} onClick={() => setAction({ ...action, delete: false })} bg="gray_3" color="white" _hover={{ bg: "gray_4" }} ml={3}>
+          <Button ref={cancelRef} onClick={() => onClose(mode)} bg="gray_3" color="white" _hover={{ bg: "gray_4" }} ml={3}>
             No
           </Button>
         </AlertDialogFooter>

@@ -1,6 +1,6 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import React from "react";
-import { DisplaySinglePdf, Layout, UploadPdf, PreviewPdf, DisplayPdf, View } from "../components";
+import { DisplaySinglePdf, Layout, UploadPdf, PreviewPdf, DisplayPdf, PdfDetails, PdfAction, View } from "../components";
 import usePdfStore from "../store";
 
 const data = [
@@ -25,8 +25,8 @@ const data = [
 ];
 
 function Home() {
-  const action = usePdfStore((state) => state.action);
-  const pdf = usePdfStore((state) => state.pdf);
+  const action = usePdfStore((state: any) => state.action);
+  const pdf = usePdfStore((state: any) => state.pdf);
   // const preview = usePdfStore((state) => state.preview);
   // const setPreview = usePdfStore((state) => state.setPreview);
 
@@ -44,25 +44,27 @@ function Home() {
         React Pdf App
       </Heading>
 
-      <Flex flexDir={"column"} justify="center">
-        {data.map((item, idx) => (
-          <DisplaySinglePdf key={idx} data={item} />
-        ))}
-      </Flex>
+      <View cond={action.displayAll}>
+        <Flex flexDir={"column"} justify="center">
+          {data.map((item, idx) => (
+            <DisplaySinglePdf key={idx} data={item} />
+          ))}
+        </Flex>
+      </View>
 
       <UploadPdf />
 
-      {/* <View cond={action.delete}>
-        <PdfAction isOpen={action.delete} pdfId={pdf.id} mode="delete" />
-      </View> */}
+      <View cond={action.delete}>
+        <PdfAction isOpen={action.delete} pdfId={data[0].id} mode="delete" />
+      </View>
 
       {/* <View cond={action.disable}>
         <PdfAction isOpen={action.disable} pdfId={pdf.id} mode="disable" />
       </View> */}
 
-      {/* <View cond={action.details}>
+      <View cond={action.details}>
         <PdfDetails isOpen={action.details} />
-      </View> */}
+      </View>
 
       <View cond={action.preview}>
         <PreviewPdf />

@@ -11,10 +11,10 @@ const toastConfig: any = {
   position: "top-right",
 };
 const UploadPdf = () => {
-  const setFileName = usePdfStore((state: any) => state.setFileName);
+  const setFileDetails = usePdfStore((state: any) => state.setFileDetails);
   const setPdf = usePdfStore((state: any) => state.setPdf);
   const pdf = usePdfStore((state: any) => state.pdf);
-  const fileName = usePdfStore((state: any) => state.fileName);
+  const fileDetails = usePdfStore((state: any) => state.fileDetails);
 
   const refButton = useRef<any>(null);
   const toast = useToast();
@@ -30,7 +30,9 @@ const UploadPdf = () => {
       });
       return;
     }
-    setFileName(file.name);
+
+    setFileDetails({ size: file.size, type: file.type, name: file.name, createdAt: "", editedAt: "" });
+
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
@@ -58,7 +60,7 @@ const UploadPdf = () => {
       />
       <View cond={pdf}>
         <Text pos="fixed" right="22%" bottom="6%" w="50vw" textAlign="right">
-          {fileName}
+          {fileDetails.name}
         </Text>
         <Button onClick={() => setPdf(null)} pos="fixed" right="12%" bottom="5%">
           Reset

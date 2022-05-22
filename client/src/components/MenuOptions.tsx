@@ -1,4 +1,4 @@
-import { IconButton, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { IconButton, Box, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { BiDetail } from "react-icons/bi";
@@ -11,47 +11,42 @@ interface IMenuOptions {
 }
 
 const MenuOptions = ({ pdfId }: IMenuOptions) => {
-  const setPdf = usePdfStore((state) => state.setPdf);
-  const setAction = usePdfStore((state) => state.setAction);
+  const setPdf = usePdfStore((state: any) => state.setPdf);
+  const setAction = usePdfStore((state: any) => state.setAction);
+  const action = usePdfStore((state: any) => state.action);
 
   const onEdit = (pdfId: string | number) => {
-    // console.log('edit product: ', productId)
     setAction({ edit: true });
-    // setPdf(pdf);
   };
   const onDelete = (pdfId: string | number) => {
-    // console.log('delete product: ', productId)
     setAction({ delete: true });
-    // setPdf({ id: pdfId });
   };
   const onPreview = (pdfId: string | number) => {
-    // console.log('edit product: ', productId)
-    setAction({ edit: true });
-    // setPdf(pdf);
+    setAction({ preview: true });
   };
   const onDetails = (pdfId: string | number) => {
-    // console.log('details product: ', productId)
     setAction({ details: true });
-    // setPdf(pdf);
   };
   return (
-    <Menu>
-      <MenuButton as={IconButton} icon={<FaEllipsisV />}></MenuButton>
-      <MenuList>
-        <MenuItem color={"warning"} icon={<FiEdit color="warning" size="18" />} onClick={() => onEdit(pdfId)}>
-          Edit
-        </MenuItem>
-        <MenuItem color={"error"} icon={<FiTrash color="error" size="18" />} onClick={() => onDelete(pdfId)}>
-          Delete
-        </MenuItem>
-        <MenuItem color={"gray_4"} icon={<AiOutlineClose color="disable" size="18" />} onClick={() => onPreview(pdfId)}>
-          Preview
-        </MenuItem>
-        <MenuItem color={"info"} icon={<BiDetail color={"info"} size="18" />} onClick={() => onDetails(pdfId)}>
-          Details
-        </MenuItem>
-      </MenuList>
-    </Menu>
+    <Box onClick={(e) => e.preventDefault()}>
+      <Menu>
+        <MenuButton as={IconButton} icon={<FaEllipsisV />}></MenuButton>
+        <MenuList>
+          <MenuItem color={"warning"} icon={<FiEdit color="warning" size="18" />} onClick={() => onEdit(pdfId)}>
+            Edit
+          </MenuItem>
+          <MenuItem color={"error"} icon={<FiTrash color="error" size="18" />} onClick={() => onDelete(pdfId)}>
+            Delete
+          </MenuItem>
+          <MenuItem color={"gray_4"} icon={<AiOutlineClose color="disable" size="18" />} onClick={() => onPreview(pdfId)}>
+            Preview
+          </MenuItem>
+          <MenuItem color={"info"} icon={<BiDetail color={"info"} size="18" />} onClick={() => onDetails(pdfId)}>
+            Details
+          </MenuItem>
+        </MenuList>
+      </Menu>
+    </Box>
   );
 };
 
