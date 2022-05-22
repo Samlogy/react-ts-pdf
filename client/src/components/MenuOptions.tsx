@@ -1,10 +1,11 @@
 import { IconButton, Box, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import React from "react";
+import React, { useRef } from "react";
 import { AiOutlineClose, AiOutlineEye, AiOutlineDownload, AiOutlinePrinter } from "react-icons/ai";
 import { BiDetail } from "react-icons/bi";
 import { FaEllipsisV } from "react-icons/fa";
 import { FiEdit, FiTrash } from "react-icons/fi";
 import { GrCircleInformation } from "react-icons/gr";
+import { Link } from "react-router-dom";
 import usePdfStore from "../store";
 
 interface IMenuOptions {
@@ -15,6 +16,9 @@ const MenuOptions = ({ pdfId }: IMenuOptions) => {
   const setPdf = usePdfStore((state: any) => state.setPdf);
   const setAction = usePdfStore((state: any) => state.setAction);
   const action = usePdfStore((state: any) => state.action);
+  const pdf = usePdfStore((state: any) => state.pdf);
+
+  const linkRef = useRef<any>(null);
 
   const onEdit = (pdfId: string | number) => {
     setAction({ edit: true });
@@ -32,7 +36,7 @@ const MenuOptions = ({ pdfId }: IMenuOptions) => {
     setAction({ print: true });
   };
   const onDowload = (pdfId: string | number) => (pdfId: string | number) => {
-    setAction({ print: true });
+    linkRef.current.click();
   };
   return (
     <Box onClick={(e) => e.preventDefault()}>
@@ -59,6 +63,10 @@ const MenuOptions = ({ pdfId }: IMenuOptions) => {
           </MenuItem>
         </MenuList>
       </Menu>
+
+      <a href={pdf && pdf} download ref={linkRef} style={{ display: "none" }}>
+        Download
+      </a>
     </Box>
   );
 };

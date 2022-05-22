@@ -19,6 +19,18 @@ const UploadPdf = () => {
   const refButton = useRef<any>(null);
   const toast = useToast();
 
+  const convertOctToMo = (size: any) => {
+    const UNIT = 1024;
+    if (size === 0) return 0;
+
+    let new_size = size;
+    while (new_size >= UNIT) {
+      new_size = new_size / UNIT;
+    }
+    console.log(new_size);
+    return new_size;
+  };
+
   const handlePdf = (inputVal: any) => {
     const file = inputVal[0];
     if (file.type !== "application/pdf") {
@@ -31,7 +43,7 @@ const UploadPdf = () => {
       return;
     }
 
-    setFileDetails({ size: file.size, type: file.type, name: file.name, createdAt: "", editedAt: "" });
+    setFileDetails({ size: convertOctToMo(file.size), type: file.type, name: file.name, createdAt: "", editedAt: "" });
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
