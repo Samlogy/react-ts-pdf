@@ -4,8 +4,8 @@ import usePdfStore from "../store";
 import { DisplayPdf } from "./";
 
 const PreviewPdf = () => {
-  const action = usePdfStore((state) => state.action);
-  const setAction = usePdfStore((state) => state.setAction);
+  const action = usePdfStore((state: any) => state.action);
+  const setAction = usePdfStore((state: any) => state.setAction);
 
   return (
     <div>

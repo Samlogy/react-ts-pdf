@@ -8,7 +8,7 @@ const toastConfig: any = {
   variant: "subtle",
   duration: 3000,
   isClosable: true,
-  position: "bottom-right",
+  position: "top-right",
 };
 const UploadPdf = () => {
   const setFileName = usePdfStore((state: any) => state.setFileName);

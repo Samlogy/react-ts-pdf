@@ -19,8 +19,8 @@ export default function DisplayPdf({ preview = false }: IDisplayPdf) {
   const [numPages, setNumPages] = useState<any>(null);
   const [pageNumber, setPageNumber] = useState(1); //setting 1 to show fisrt page
 
-  const isMultiPage = usePdfStore((state) => state.isMultiPage);
-  const action = usePdfStore((state) => state.action);
+  const isMultiPage = usePdfStore((state: any) => state.isMultiPage);
+  const action = usePdfStore((state: any) => state.action);
 
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -41,7 +41,7 @@ export default function DisplayPdf({ preview = false }: IDisplayPdf) {
     changePage(1);
   }
 
-  const pdf = usePdfStore((state) => state.pdf);
+  const pdf = usePdfStore((state: any) => state.pdf);
 
   return (
     <>
@@ -86,23 +86,23 @@ const Bottom = ({ pageNumber, numPages, nextPage, previousPage }: IBottom) => {
 };
 
 const Header = ({ preview = false }: { preview?: boolean }) => {
-  const setPdf = usePdfStore((state) => state.setPdf);
-  const zoomIn = usePdfStore((state) => state.zoomIn);
-  const zoomOut = usePdfStore((state) => state.zoomOut);
-  const fileName = usePdfStore((state) => state.fileName);
-  const setMultiPage = usePdfStore((state) => state.setMultiPage);
-  const pdf = usePdfStore((state) => state.pdf);
-  const action = usePdfStore((state) => state.action);
+  const setPdf = usePdfStore((state: any) => state.setPdf);
+  const zoomIn = usePdfStore((state: any) => state.zoomIn);
+  const zoomOut = usePdfStore((state: any) => state.zoomOut);
+  const fileName = usePdfStore((state: any) => state.fileName);
+  const setMultiPage = usePdfStore((state: any) => state.setMultiPage);
+  const pdf = usePdfStore((state: any) => state.pdf);
+  const action = usePdfStore((state: any) => state.action);
 
-  const setAction = usePdfStore((state) => state.setAction);
+  const setAction = usePdfStore((state: any) => state.setAction);
 
   const [pageMode, setPageMode] = useState("single");
 
   const handleClose = () => {
     if (action.preview) {
-      setAction({ ...action, preview: false });
+      setAction({ ...action, preview: false, displayAll: true });
     } else {
-      setAction({ ...action, display: false });
+      setAction({ ...action, display: false, displayAll: true });
     }
     setPdf(null);
   };
@@ -129,7 +129,8 @@ const Header = ({ preview = false }: { preview?: boolean }) => {
       borderRadius={"10px"}
       p=".75rem 1.5rem"
       pos="fixed"
-      top="0"
+      top={"0"}
+      left={"0"}
       zIndex={100}
       w="full"
       opacity={0.8}

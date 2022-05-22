@@ -5,7 +5,7 @@ import { MenuOptions } from "../components";
 import usePdfStore from "../store";
 
 const DisplaySinglePdf = ({ data }: { data: any }) => {
-  const setAction = usePdfStore((state) => state.setAction);
+  const setAction = usePdfStore((state: any) => state.setAction);
   return (
     <Flex
       justify={"space-between"}
@@ -17,7 +17,7 @@ const DisplaySinglePdf = ({ data }: { data: any }) => {
       mx="auto"
       transition="all .25s"
       _hover={{ cursor: "pointer", bg: "gray.200" }}
-      onClick={() => setAction({ display: true })}
+      // onClick={() => setAction({ display: true })}
     >
       <AiOutlineFilePdf size={18} />
       <Flex flexDir={"column"}>

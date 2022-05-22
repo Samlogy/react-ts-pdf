@@ -5,7 +5,7 @@ import { AiOutlineDownload } from "react-icons/ai";
 import usePdfStore from "../store";
 
 export default function DownloadPdf() {
-  const pdf = usePdfStore((state) => state.pdf);
+  const pdf = usePdfStore((state: any) => state.pdf);
   return (
     <a href={pdf} download>
       <IconButton aria-label="donwload" icon={<AiOutlineDownload />} />
